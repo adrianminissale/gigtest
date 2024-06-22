@@ -1,27 +1,35 @@
-const currencies = []
+const currencies = [];
+let currencyId = 0;
 
 const add = async (parent, { currency }) => {
-  const newCoin = { currency };
+  const newCoin = {...currency, id: currencyId++};
   currencies.push(newCoin);
-  console.log('------------------------------------');
-  console.log(currency);
-  console.log('------------------------------------');
   return "Currency Added!";
 };
 
-const get = async (parent, { name }) => {
-  console.log('------------------------------------');
-  console.log(currencies);
-  console.log('------------------------------------');
-  return currencies.filter(coin => coin.name === name);
+const getAll = async (parent) => {
+  return currencies;
 };
 
-const update = async (parent, args) => {};
+const get = async (parent, { name }) => {
+  return currencies.find(coin => coin.name === name);
+};
 
-const remove = async (parent, args) => {};
+const update = async (parent, { currency }) => {
+  const currencyId = currencies.findIndex(coin => coin.name === currency.name);
+  currencies[currencyId] = {...currencies[currencyId], ...currency}
+  return currency;
+};
+
+const remove = async (parent, { name }) => {
+  const currencyId = currencies.findIndex(coin => coin.name === name);
+  currencies.splice(currencyId, 1);
+  return "Currency Deleted!";
+};
 
 module.exports = {
   Query: {
+    getAll: getAll,
     getValue: get,
   },
   Mutation: {

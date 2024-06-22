@@ -1,5 +1,6 @@
 type Query {
     getValue(name: String!): Value
+    getAll: [Value]
 }
 
 type Mutation {
@@ -9,7 +10,6 @@ type Mutation {
 }
 
 type Value {
-    id: Int,
     name: String,
     value: Int
 }
