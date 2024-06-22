@@ -1,3 +1,20 @@
-type Example {
-    example: String
+type Query {
+    getValue(name: String!): Value
+}
+
+type Mutation {
+    addCurrency(currency: CurrencyInput!): String
+    updateCurrency(currency: CurrencyInput!): Value
+    deleteCurrency(name: String): String
+}
+
+type Value {
+    id: Int,
+    name: String,
+    value: Int
+}
+
+input CurrencyInput {
+    name: String,
+    value: Int
 }

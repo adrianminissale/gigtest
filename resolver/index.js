@@ -1,6 +1,20 @@
-const add = async (parent, args) => {};
+const currencies = []
 
-const get = async (parent, args) => {};
+const add = async (parent, { currency }) => {
+  const newCoin = { currency };
+  currencies.push(newCoin);
+  console.log('------------------------------------');
+  console.log(currency);
+  console.log('------------------------------------');
+  return "Currency Added!";
+};
+
+const get = async (parent, { name }) => {
+  console.log('------------------------------------');
+  console.log(currencies);
+  console.log('------------------------------------');
+  return currencies.filter(coin => coin.name === name);
+};
 
 const update = async (parent, args) => {};
 
